@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login - FinTrack</title>
+
+    <link
+        rel="stylesheet"
+        href="cs/style.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="page-shell">
+
+        <div class="login-card">
+
+            <div class="login-brand">
+
+                <div class="brand-mark">
+                    A.R
+                </div>
+
+                <div>
+
+                    <h1>FinTrack</h1>
+
+                    <p>
+                        Secure access to your finances
+                    </p>
+
+                </div>
+
+            </div>
+
+            <form
+                id="loginForm"
+                class="login-form"
+                novalidate
+            >
+
+                <!-- EMAIL -->
+                <div class="field-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        id="email"
+                        type="email"
+                        placeholder="Enter email address"
+                        autocomplete="email"
+                    />
+
+                </div>
+
+                <!-- PIN -->
+                <div class="field-group">
+
+                    <label for="pin">
+                        PIN
+                    </label>
+
+                    <div class="pin-field">
+
+                        <input
+                            id="pin"
+                            type="password"
+                            maxlength="4"
+                            placeholder="Enter 4-digit PIN"
+                            autocomplete="current-password"
+                        />
+
+                        <button
+                            type="button"
+                            id="togglePin"
+                            class="toggle-pin"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- LOGIN BUTTON -->
+                <button
+                    type="submit"
+                    class="btn-primary"
+                >
+                    Login
+                </button>
+
+                <!-- MESSAGE -->
+                <p
+                    id="message"
+                    class="message"
+                ></p>
+
+                <!-- REGISTER LINK -->
+                <div class="meta-row">
+
+                    <a
+                        href="register.html"
+                        class="meta-link"
+                    >
+                        Create Account
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- LOGIN SCRIPT -->
+    <script src="js/login.js"></script>
+
+</body>
+
+</html>

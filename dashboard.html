@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FinTrack</title>
+
+    <link rel="stylesheet" href="cs/style.css">
+</head>
+
+<body>
+
+<div class="page-shell">
+
+    <div class="dashboard-card">
+
+        <!-- HEADER -->
+        <header class="dashboard-header">
+
+            <div>
+
+                <h2 id="welcome"></h2>
+
+                <p class="dashboard-subtitle">
+                    Track your income, expenses, and stay on top of your goals.
+                </p>
+
+            </div>
+
+            <button
+                class="btn-secondary small"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </header>
+
+        <!-- SUMMARY -->
+        <div class="summary-cards">
+
+            <div class="card">
+                <h3>Balance</h3>
+                <p id="balance">₹0</p>
+            </div>
+
+            <div class="card">
+                <h3>Income</h3>
+                <p id="income">₹0</p>
+            </div>
+
+            <div class="card">
+                <h3>Expense</h3>
+                <p id="expense">₹0</p>
+            </div>
+
+        </div>
+
+        <!-- FEATURES -->
+        <section class="dashboard-grid">
+
+            <button
+                class="dashboard-button"
+                onclick="goToAddIncome()"
+            >
+                Add Income
+            </button>
+
+            <button
+                class="dashboard-button"
+                onclick="goToAddExpense()"
+            >
+                Add Expense
+            </button>
+
+            <button
+                class="dashboard-button"
+                onclick="goToViewTransactions()"
+            >
+                View Transactions
+            </button>
+
+            <button
+                class="dashboard-button"
+                onclick="goToAnalytics()"
+            >
+                Analytics Dashboard
+            </button>
+
+            <button
+                class="dashboard-button"
+                onclick="window.location.href='monthly-summary.html'"
+            >
+                Monthly Summary
+            </button>
+
+            <button
+                class="dashboard-button"
+                onclick="window.location.href='export-data.html'"
+            >
+                Export Data
+            </button>
+
+        </section>
+
+        <!-- ACCOUNT ACTIONS -->
+        <section class="dashboard-actions">
+
+            <button
+                class="btn-danger"
+                onclick="deleteAccount()"
+            >
+                Delete Account
+            </button>
+
+        </section>
+
+    </div>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>

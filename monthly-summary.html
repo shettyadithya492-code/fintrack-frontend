@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Summary - FinTrack</title>
+
+    <link rel="stylesheet" href="cs/style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="page-shell">
+
+    <div class="transactions-card">
+
+        <!-- HEADER -->
+        <div class="transactions-header">
+
+            <div>
+
+                <button
+                    class="back-btn"
+                    onclick="window.location.href='dashboard.html'"
+                >
+                    Back
+                </button>
+
+                <h1>Monthly Summary</h1>
+
+                <p class="dashboard-subtitle">
+                    Analyze your monthly financial activity
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- MONTH SELECTOR -->
+        <div class="top-controls">
+
+            <input
+                type="month"
+                id="monthSelector"
+                class="date-input"
+            >
+
+            <button
+                class="btn-primary"
+                onclick="loadMonthlySummary()"
+            >
+                Load Summary
+            </button>
+
+        </div>
+
+        <!-- SUMMARY CARDS -->
+        <div class="summary-cards">
+
+            <div class="card">
+                <h3>Total Income</h3>
+                <p id="monthlyIncome">₹0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Expense</h3>
+                <p id="monthlyExpense">₹0</p>
+            </div>
+
+            <div class="card">
+                <h3>Savings</h3>
+                <p id="monthlySavings">₹0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Transactions</h3>
+                <p id="monthlyTransactions">0</p>
+            </div>
+
+        </div>
+
+        <!-- BAR CHART -->
+        <div class="chart-container">
+
+            <h2>Income vs Expense</h2>
+
+            <canvas id="monthlyBarChart"></canvas>
+
+        </div>
+
+        <!-- PIE CHART -->
+        <div class="chart-container">
+
+            <h2>Expense Categories</h2>
+
+            <canvas id="monthlyPieChart"></canvas>
+
+        </div>
+
+        <!-- TRANSACTIONS -->
+        <div class="transactions-table-container">
+
+            <table class="transactions-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Mode</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="monthlyTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/monthly-summary.js"></script>
+
+</body>
+</html>

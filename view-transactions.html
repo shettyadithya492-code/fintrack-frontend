@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Transactions - FinTrack</title>
+    <link rel="stylesheet" href="cs/style.css">
+</head>
+<body>
+
+<div class="page-shell">
+
+    <div class="transactions-card">
+
+        <!-- Header -->
+        <div class="transactions-header">
+            <div>
+                <button class="back-btn" onclick="window.location.href='dashboard.html'">
+                    Back
+                </button>
+
+                <h1>View Transactions</h1>
+
+                <p class="dashboard-subtitle">
+                    View and manage all your transactions.
+                </p>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary-cards">
+
+            <div class="card">
+                <h3>Total Income</h3>
+                <p id="totalIncome">₹0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Expense</h3>
+                <p id="totalExpense">₹0</p>
+            </div>
+
+            <div class="card">
+                <h3>Balance</h3>
+                <p id="balance">₹0</p>
+            </div>
+
+        </div>
+
+        <!-- FILTERS -->
+<div class="top-controls">
+                
+    <!-- Category Filter -->
+<select
+    id="categoryFilter"
+    onchange="filterByCategory()"
+    class="date-input"
+>
+    <option value="">All Categories</option>
+
+    <optgroup label="Income">
+        <option value="Salary">Salary</option>
+        <option value="Freelance">Freelance</option>
+        <option value="Business">Business</option>
+        <option value="Investment">Investment</option>
+        <option value="Gift">Gift</option>
+    </optgroup>
+
+    <optgroup label="Expense">
+        <option value="Food">Food</option>
+        <option value="Travel">Travel</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Bills">Bills</option>
+        <option value="Medical">Medical</option>
+        <option value="Entertainment">Entertainment</option>
+    </optgroup>
+
+</select>
+
+    <!-- Date -->
+    <input 
+        type="date"
+        id="dateFilter"
+        onchange="filterByDate()"
+        class="date-input"
+    >
+
+</div>
+
+<!-- TYPE FILTERS -->
+<div class="filter-buttons">
+
+    <button class="filter-btn active" onclick="filterTransactions('all', event)">
+        All
+    </button>
+
+    <button class="filter-btn income-btn" onclick="filterTransactions('income', event)">
+        Income
+    </button>
+
+    <button class="filter-btn expense-btn" onclick="filterTransactions('expense', event)">
+        Expense
+    </button>
+
+</div>
+
+        <!-- Transactions Table -->
+        <div class="transactions-table-container">
+
+            <table class="transactions-table">
+
+                <thead>
+    <tr>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Mode</th>
+        <th>Note</th>
+        <th>Actions</th>
+    </tr>
+</thead>
+
+                <tbody id="transactionsTable">
+                    <!-- Dynamic Data -->
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <p id="message" class="message"></p>
+
+        <div id="editModal" class="modal-backdrop" aria-hidden="true">
+            <div class="modal-card">
+                <h3>Edit Transaction</h3>
+
+                <div class="field-group">
+                    <label for="editAmount">Amount</label>
+                    <input id="editAmount" type="number" min="1" />
+                </div>
+
+                <div class="field-group">
+                    <label for="editCategory">Category</label>
+                    <input id="editCategory" type="text" />
+                </div>
+
+                <div class="field-group">
+                    <label for="editMode">Mode</label>
+                    <select id="editMode">
+                        <option value="Cash">Cash</option>
+                        <option value="Bank">Bank</option>
+                        <option value="Debit Card">Debit Card</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="UPI">UPI</option>
+                        <option value="Other">Other</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label for="editNote">Note</label>
+                    <input id="editNote" type="text" />
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-primary" onclick="saveEditTransaction()">Save</button>
+                    <button class="cancel" type="button" onclick="closeEditModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/view-transactions.js"></script>
+
+</body>
+</html>

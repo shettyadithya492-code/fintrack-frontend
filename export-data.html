@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export Data - FinTrack</title>
+
+    <link rel="stylesheet" href="cs/style.css">
+</head>
+
+<body>
+
+<div class="page-shell">
+
+    <div class="transactions-card">
+
+        <!-- HEADER -->
+        <div class="transactions-header">
+
+            <div>
+
+                <button
+                    class="back-btn"
+                    onclick="window.location.href='dashboard.html'"
+                >
+                    Back
+                </button>
+
+                <h1>Export Data</h1>
+
+                <p class="dashboard-subtitle">
+                    Download your financial reports and transactions
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- EXPORT OPTIONS -->
+        <div class="export-grid">
+
+            <!-- EXPORT ALL -->
+            <div class="card export-card">
+
+                <h3>Export All Transactions</h3>
+
+                <p>
+                    Download complete income and expense history
+                </p>
+
+                <button
+                    class="btn-primary"
+                    onclick="exportAllTransactions()"
+                >
+                    Export CSV
+                </button>
+
+            </div>
+
+            <!-- EXPORT INCOME -->
+            <div class="card export-card">
+
+                <h3>Export Income</h3>
+
+                <p>
+                    Download only income transactions
+                </p>
+
+                <button
+                    class="btn-primary"
+                    onclick="exportIncome()"
+                >
+                    Export Income CSV
+                </button>
+
+            </div>
+
+            <!-- EXPORT EXPENSE -->
+            <div class="card export-card">
+
+                <h3>Export Expense</h3>
+
+                <p>
+                    Download only expense transactions
+                </p>
+
+                <button
+                    class="btn-primary"
+                    onclick="exportExpense()"
+                >
+                    Export Expense CSV
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- MONTHLY EXPORT -->
+        <div class="chart-container">
+
+            <h2>Monthly Export</h2>
+
+            <div class="top-controls">
+
+                <input
+                    type="month"
+                    id="monthSelector"
+                    class="date-input"
+                >
+
+                <button
+                    class="btn-primary"
+                    onclick="exportMonthlyReport()"
+                >
+                    Export Monthly CSV
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/export-data.js"></script>
+
+</body>
+</html>
