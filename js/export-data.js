@@ -1,5 +1,5 @@
 const BASE_URL =
-    "http://localhost:5000/api/transactions";
+    "https://fintrack-backend-dv9z.onrender.com/api/transactions";
 
 // ==========================
 // LOAD USER
@@ -25,7 +25,7 @@ async function loadTransactions() {
     try {
 
         const res = await fetch(
-            `${BASE_URL}/all?email=${user.email}`
+            `${BASE_URL}/all?phone=${user.phone}`
         );
 
         const data =

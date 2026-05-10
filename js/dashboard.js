@@ -1,6 +1,6 @@
 
 const BASE_URL =
-    "http://localhost:5000/api/transactions";
+    "https://fintrack-backend-dv9z.onrender.com/api/transactions";
 
 // ==========================
 // LOAD USER
@@ -30,7 +30,7 @@ async function loadSummary() {
     try {
 
         const res = await fetch(
-            `${BASE_URL}/summary?email=${user.email}`
+            `${BASE_URL}/summary?phone=${user.phone}`
         );
 
         const data =
@@ -101,7 +101,7 @@ async function deleteAccount() {
     try {
 
         const res = await fetch(
-    "http://localhost:5000/api/auth/delete-account",
+    "https://fintrack-backend-dv9z.onrender.com/api/auth/delete-account",
             {
                 method: "DELETE",
 
@@ -112,7 +112,7 @@ async function deleteAccount() {
 
                 body: JSON.stringify({
 
-                    email: user.email,
+                    phone: user.phone,
                     pin
                 })
             }

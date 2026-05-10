@@ -1,7 +1,7 @@
 // =====================
 // LOAD USER
 // =====================
-const BASE_URL = "http://localhost:5000/api/transactions";
+const BASE_URL = "https://fintrack-backend-dv9z.onrender.com/api/transactions";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
@@ -14,7 +14,7 @@ if (!user) {
 // =====================
 async function loadAnalytics() {
     try {
-        const res = await fetch(`${BASE_URL}/all?email=${user.email}`);
+        const res = await fetch(`${BASE_URL}/all?phone=${user.phone}`);
         const transactions = await res.json();
 
         if (!res.ok) {

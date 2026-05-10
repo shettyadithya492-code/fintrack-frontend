@@ -1,7 +1,5 @@
 const BASE_URL =
-    "http://localhost:5000/api/auth";
-
-let otpVerified = false;
+    "https://fintrack-backend-dv9z.onrender.com/api/auth";
 
 // ==========================
 // MESSAGE HELPER
@@ -21,155 +19,39 @@ function setMessage(
 }
 
 // ==========================
-// EMAIL VALIDATION
+// PHONE VALIDATION
 // ==========================
-function validateEmail(email) {
+function validatePhone(phone) {
 
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        .test(email);
+    return /^[6-9]\d{9}$/
+        .test(phone);
 }
 
 // ==========================
-// SEND OTP
+// TOGGLE PIN VISIBILITY
 // ==========================
-async function sendOTP() {
+function togglePinVisibility(
+    inputId,
+    buttonId
+) {
 
-    const email =
-        document.getElementById("email")
-            .value
-            .trim();
+    const input =
+        document.getElementById(inputId);
 
-    otpVerified = false;
+    const button =
+        document.getElementById(buttonId);
 
-    if (!validateEmail(email)) {
+    if (input.type === "password") {
 
-        return setMessage(
-            "Enter valid email address"
-        );
-    }
+        input.type = "text";
 
-    try {
+        button.innerText = "Hide";
 
-        setMessage(
-            "Sending OTP...",
-            "#2563eb"
-        );
+    } else {
 
-        const res = await fetch(
-            `${BASE_URL}/send-otp`,
-            {
-                method: "POST",
+        input.type = "password";
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-                    email
-                })
-            }
-        );
-
-        const data = await res.json();
-
-        if (!res.ok) {
-
-            return setMessage(
-                data.message || "Failed to send OTP"
-            );
-        }
-
-        setMessage(
-            "OTP sent to your email",
-            "#16a34a"
-        );
-
-        document
-            .getElementById("otpSection")
-            .classList.remove("hidden");
-
-    } catch (error) {
-
-        console.error(error);
-
-        setMessage(
-            "Failed to send OTP"
-        );
-    }
-}
-
-// ==========================
-// VERIFY OTP
-// ==========================
-async function verifyOTP() {
-
-    const email =
-        document.getElementById("email")
-            .value
-            .trim();
-
-    const otp =
-        document.getElementById("otp")
-            .value
-            .trim();
-
-    if (!otp) {
-
-        return setMessage(
-            "Enter OTP"
-        );
-    }
-
-    try {
-
-        setMessage(
-            "Verifying OTP...",
-            "#2563eb"
-        );
-
-        const res = await fetch(
-            `${BASE_URL}/verify-otp`,
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-                    email,
-                    otp
-                })
-            }
-        );
-
-        const data = await res.json();
-
-        if (!res.ok) {
-
-            return setMessage(
-                data.message || "Invalid OTP"
-            );
-        }
-
-        otpVerified = true;
-
-        setMessage(
-            "OTP verified successfully",
-            "#16a34a"
-        );
-
-        document
-            .getElementById("pinSection")
-            .classList.remove("hidden");
-
-    } catch (error) {
-
-        console.error(error);
-
-        setMessage(
-            "OTP verification failed"
-        );
+        button.innerText = "Show";
     }
 }
 
@@ -178,20 +60,13 @@ async function verifyOTP() {
 // ==========================
 async function register() {
 
-    if (!otpVerified) {
-
-        return setMessage(
-            "Verify OTP first"
-        );
-    }
-
     const name =
         document.getElementById("name")
             .value
             .trim();
 
-    const email =
-        document.getElementById("email")
+    const phone =
+        document.getElementById("phone")
             .value
             .trim();
 
@@ -205,9 +80,10 @@ async function register() {
             .value
             .trim();
 
+    // VALIDATION
     if (
         !name ||
-        !email ||
+        !phone ||
         !pin ||
         !confirmPin
     ) {
@@ -217,10 +93,10 @@ async function register() {
         );
     }
 
-    if (!validateEmail(email)) {
+    if (!validatePhone(phone)) {
 
         return setMessage(
-            "Enter valid email address"
+            "Enter valid 10-digit phone number"
         );
     }
 
@@ -244,40 +120,43 @@ async function register() {
     try {
 
         setMessage(
-            "Registering...",
+            "Creating account...",
             "#2563eb"
         );
 
-        const res = await fetch(
+        const response = await fetch(
             `${BASE_URL}/register`,
             {
                 method: "POST",
 
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type":
+                        "application/json"
                 },
 
                 body: JSON.stringify({
 
                     name,
-                    email,
+                    phone,
                     pin,
                     confirmPin
                 })
             }
         );
 
-        const data = await res.json();
+        const data =
+            await response.json();
 
-        if (!res.ok) {
+        if (!response.ok) {
 
             return setMessage(
-                data.message || "Registration failed"
+                data.message ||
+                "Registration failed"
             );
         }
 
         setMessage(
-            "Registered successfully!",
+            "Account created successfully!",
             "#16a34a"
         );
 
@@ -286,14 +165,14 @@ async function register() {
             window.location.href =
                 "index.html";
 
-        }, 1000);
+        }, 1200);
 
     } catch (error) {
 
         console.error(error);
 
         setMessage(
-            "Registration failed"
+            "Unable to connect to server"
         );
     }
 }
@@ -305,32 +184,41 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
+        // TOGGLE PIN
         document
-            .getElementById("sendOtp")
+            .getElementById("togglePin")
             .addEventListener(
                 "click",
-                sendOTP
+                () =>
+                    togglePinVisibility(
+                        "pin",
+                        "togglePin"
+                    )
             );
 
+        // TOGGLE CONFIRM PIN
         document
-            .getElementById("verifyOtp")
+            .getElementById("toggleConfirmPin")
             .addEventListener(
                 "click",
-                verifyOTP
+                () =>
+                    togglePinVisibility(
+                        "confirmPin",
+                        "toggleConfirmPin"
+                    )
             );
 
-        document
-            .getElementById("registerButton")
-            .addEventListener(
-                "click",
-                register
-            );
-
+        // REGISTER FORM
         document
             .getElementById("registerForm")
             .addEventListener(
                 "submit",
-                event => event.preventDefault()
+                event => {
+
+                    event.preventDefault();
+
+                    register();
+                }
             );
     }
 );

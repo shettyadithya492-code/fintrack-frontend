@@ -1,8 +1,5 @@
 const BASE_URL =
-    "http://localhost:5000/api/auth";
-
-// Force fresh login every time
-localStorage.removeItem("user");
+    "https://fintrack-backend-dv9z.onrender.com/api/auth";
 
 // ==========================
 // MESSAGE HELPER
@@ -23,12 +20,12 @@ function setMessage(
 }
 
 // ==========================
-// EMAIL VALIDATION
+// PHONE VALIDATION
 // ==========================
-function validateEmail(email) {
+function validatePhone(phone) {
 
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        .test(email);
+    return /^[6-9]\d{9}$/
+        .test(phone);
 }
 
 // ==========================
@@ -61,8 +58,8 @@ function togglePinVisibility() {
 // ==========================
 async function login() {
 
-    const email =
-        document.getElementById("email")
+    const phone =
+        document.getElementById("phone")
             .value
             .trim();
 
@@ -71,17 +68,18 @@ async function login() {
             .value
             .trim();
 
-    if (!email || !pin) {
+    // VALIDATION
+    if (!phone || !pin) {
 
         return setMessage(
-            "Please enter email and PIN."
+            "Please enter phone number and PIN."
         );
     }
 
-    if (!validateEmail(email)) {
+    if (!validatePhone(phone)) {
 
         return setMessage(
-            "Enter valid email address."
+            "Enter valid 10-digit phone number."
         );
     }
 
@@ -112,7 +110,7 @@ async function login() {
                 },
 
                 body: JSON.stringify({
-                    email,
+                    phone,
                     pin
                 })
             }
@@ -129,7 +127,7 @@ async function login() {
             );
         }
 
-        // Save User
+        // SAVE USER
         localStorage.setItem(
             "user",
             JSON.stringify(data.user)
@@ -140,15 +138,12 @@ async function login() {
             "#16a34a"
         );
 
-        // Welcome Animation
-        showAnimeWelcome();
-
         setTimeout(() => {
 
             window.location.href =
                 "dashboard.html";
 
-        }, 1800);
+        }, 1000);
 
     } catch (error) {
 
@@ -158,21 +153,6 @@ async function login() {
             "Unable to reach server."
         );
     }
-}
-
-// ==========================
-// ANIME WELCOME
-// ==========================
-function showAnimeWelcome() {
-
-    const welcome =
-        document.getElementById(
-            "animeWelcome"
-        );
-
-    if (!welcome) return;
-
-    welcome.classList.add("active");
 }
 
 // ==========================

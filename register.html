@@ -10,11 +10,11 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Register - FinTrack</title>
+    <title>Create Account - FinTrack</title>
 
     <link
         rel="stylesheet"
-        href="cs/style.css"
+        href="css/style.css"
     >
 
 </head>
@@ -36,14 +36,18 @@
                 <h1>Create Account</h1>
 
                 <p>
-                    Register securely using Email OTP
+                    Register securely with phone number and PIN
                 </p>
 
             </div>
 
         </div>
 
-        <form id="registerForm" novalidate>
+        <form
+            id="registerForm"
+            class="login-form"
+            novalidate
+        >
 
             <!-- NAME -->
             <div class="field-group">
@@ -55,77 +59,35 @@
                 <input
                     id="name"
                     type="text"
-                    placeholder="Enter your name"
+                    placeholder="Enter your full name"
                 />
 
             </div>
 
-            <!-- EMAIL -->
+            <!-- PHONE -->
             <div class="field-group">
 
-                <label for="email">
-                    Email Address
+                <label for="phone">
+                    Phone Number
                 </label>
 
                 <input
-                    id="email"
-                    type="email"
-                    placeholder="Enter your email"
+                    id="phone"
+                    type="tel"
+                    maxlength="10"
+                    placeholder="Enter 10-digit phone number"
                 />
 
             </div>
 
-            <!-- SEND OTP -->
-            <button
-                type="button"
-                id="sendOtp"
-                class="btn-secondary"
-            >
-                Send OTP
-            </button>
+            <!-- PIN -->
+            <div class="field-group">
 
-            <!-- OTP SECTION -->
-            <div
-                id="otpSection"
-                class="hidden"
-            >
+                <label for="pin">
+                    Create PIN
+                </label>
 
-                <div class="field-group">
-
-                    <label for="otp">
-                        OTP Code
-                    </label>
-
-                    <input
-                        id="otp"
-                        type="text"
-                        maxlength="6"
-                        placeholder="Enter OTP"
-                    />
-
-                </div>
-
-                <button
-                    type="button"
-                    id="verifyOtp"
-                    class="btn-secondary"
-                >
-                    Verify OTP
-                </button>
-
-            </div>
-
-            <!-- PIN SECTION -->
-            <div
-                id="pinSection"
-                class="hidden"
-            >
-
-                <div class="field-group">
-
-                    <label for="pin">
-                        PIN
-                    </label>
+                <div class="pin-field">
 
                     <input
                         id="pin"
@@ -134,38 +96,61 @@
                         placeholder="Create 4-digit PIN"
                     />
 
+                    <button
+                        type="button"
+                        id="togglePin"
+                        class="toggle-pin"
+                    >
+                        Show
+                    </button>
+
                 </div>
 
-                <div class="field-group">
+            </div>
 
-                    <label for="confirmPin">
-                        Confirm PIN
-                    </label>
+            <!-- CONFIRM PIN -->
+            <div class="field-group">
+
+                <label for="confirmPin">
+                    Confirm PIN
+                </label>
+
+                <div class="pin-field">
 
                     <input
                         id="confirmPin"
                         type="password"
                         maxlength="4"
-                        placeholder="Repeat PIN"
+                        placeholder="Confirm 4-digit PIN"
                     />
+
+                    <button
+                        type="button"
+                        id="toggleConfirmPin"
+                        class="toggle-pin"
+                    >
+                        Show
+                    </button>
 
                 </div>
 
-                <button
-                    type="button"
-                    id="registerButton"
-                    class="btn-primary"
-                >
-                    Register
-                </button>
-
             </div>
 
+            <!-- REGISTER BUTTON -->
+            <button
+                type="submit"
+                class="btn-primary"
+            >
+                Create Account
+            </button>
+
+            <!-- MESSAGE -->
             <p
                 id="message"
                 class="message"
             ></p>
 
+            <!-- LOGIN LINK -->
             <div class="meta-row">
 
                 <a

@@ -1,5 +1,5 @@
 const BASE_URL =
-    "http://localhost:5000/api/transactions";
+    "https://fintrack-backend-dv9z.onrender.com/api/transactions";
 
 // ==========================
 // LOAD USER
@@ -149,7 +149,7 @@ async function addIncome() {
 
                 body: JSON.stringify({
 
-                    email: user.email,
+                    phone: user.phone,
 
                     amount,
                     category,
