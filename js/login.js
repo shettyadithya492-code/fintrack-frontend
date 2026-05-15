@@ -1,5 +1,5 @@
 const BASE_URL =
-    "https://fintrack-backend-dv9z.onrender.com/api/auth";
+"https://fintrack-backend-dv9z.onrender.com/api/auth";
 
 // ==========================
 // MESSAGE HELPER

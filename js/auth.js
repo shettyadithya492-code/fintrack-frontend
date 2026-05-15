@@ -1,21 +1,21 @@
 const BASE_URL =
-    "https://fintrack-backend-dv9z.onrender.com/api/auth";
+"https://fintrack-backend-dv9z.onrender.com/api/auth";
 
 // ==========================
 // MESSAGE HELPER
 // ==========================
 function setMessage(
-    msg,
+    message,
     color = "#dc2626"
 ) {
 
-    const el =
+    const messageEl =
         document.getElementById("message");
 
-    if (!el) return;
+    if (!messageEl) return;
 
-    el.innerText = msg;
-    el.style.color = color;
+    messageEl.innerText = message;
+    messageEl.style.color = color;
 }
 
 // ==========================
@@ -44,13 +44,11 @@ function togglePinVisibility(
     if (input.type === "password") {
 
         input.type = "text";
-
         button.innerText = "Hide";
 
     } else {
 
         input.type = "password";
-
         button.innerText = "Show";
     }
 }
@@ -80,7 +78,10 @@ async function register() {
             .value
             .trim();
 
+    // ==========================
     // VALIDATION
+    // ==========================
+
     if (
         !name ||
         !phone ||
@@ -124,29 +125,43 @@ async function register() {
             "#2563eb"
         );
 
-        const response = await fetch(
-            `${BASE_URL}/register`,
-            {
-                method: "POST",
+        const response =
+            await fetch(
+                `${BASE_URL}/register`,
+                {
+                    method: "POST",
 
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                body: JSON.stringify({
+                    body: JSON.stringify({
+                        name,
+                        phone,
+                        pin
+                    })
+                }
+            );
 
-                    name,
-                    phone,
-                    pin,
-                    confirmPin
-                })
-            }
-        );
+        // ==========================
+        // HANDLE EMPTY RESPONSE
+        // ==========================
+        let data = {};
 
-        const data =
-            await response.json();
+        try {
 
+            data =
+                await response.json();
+
+        } catch {
+
+            data = {};
+        }
+
+        // ==========================
+        // ERROR RESPONSE
+        // ==========================
         if (!response.ok) {
 
             return setMessage(
@@ -155,21 +170,28 @@ async function register() {
             );
         }
 
+        // ==========================
+        // SUCCESS
+        // ==========================
         setMessage(
             "Account created successfully!",
             "#16a34a"
         );
 
+        // REDIRECT
         setTimeout(() => {
 
             window.location.href =
                 "index.html";
 
-        }, 1200);
+        }, 1500);
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Register Error:",
+            error
+        );
 
         setMessage(
             "Unable to connect to server"
